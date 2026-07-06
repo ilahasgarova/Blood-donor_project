@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="sidebar-logo">
-        <h1>🩸 Qan Bağışı</h1>
+        <h1> Qan-Donor</h1>
         <p>Admin Panel</p>
     </div>
 

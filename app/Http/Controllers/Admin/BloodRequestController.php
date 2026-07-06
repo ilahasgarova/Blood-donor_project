@@ -8,51 +8,40 @@ use Illuminate\Http\Request;
 
 class BloodRequestController extends Controller
 {
-    public function index()
-    {
-        $bloodRequests = BloodRequest::all();
+    public function index() {
+        $bloodRequests = BloodRequest::latest()->get();
         return view('admin.blood-requests.index', compact('bloodRequests'));
     }
 
-    public function create()
-    {
+    // BAX BURA: Əgər bu funksiya burada yoxdursa, xəta alacaqsan!
+    public function create() {
         return view('admin.blood-requests.create');
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $validated = $request->validate([
-            'patient_name'  => 'required|string|max:255',
-            'blood_type'    => 'required|string|max:5',
-            'hospital_name' => 'required|string|max:255',
-            'phone'         => 'required|string|max:20',
+            'patient_name'  => 'required',
+            'units_needed'  => 'required|integer',
+            'hospital'      => 'required',
+            'city'          => 'required',
+            'contact_phone' => 'required',
+            'blood_type'    => 'required',
+            'urgency'       => 'required',
+            'status'        => 'required',
         ]);
-
-        BloodRequest::create($validated);
-        return redirect()->route('admin.blood-requests.index');
+        
+        BloodRequest::create($request->all());
+        return redirect()->route('admin.blood-requests.index')->with('success', 'Uğurla əlavə edildi!');
     }
 
-    public function edit(BloodRequest $bloodRequest)
-    {
+    public function edit($id) {
+        $bloodRequest = BloodRequest::findOrFail($id);
         return view('admin.blood-requests.edit', compact('bloodRequest'));
     }
 
-    public function update(Request $request, BloodRequest $bloodRequest)
-    {
-        $validated = $request->validate([
-            'patient_name'  => 'required|string|max:255',
-            'blood_type'    => 'required|string|max:5',
-            'hospital_name' => 'required|string|max:255',
-            'phone'         => 'required|string|max:20',
-        ]);
-
-        $bloodRequest->update($validated);
-        return redirect()->route('admin.blood-requests.index');
-    }
-
-    public function destroy(BloodRequest $bloodRequest)
-    {
-        $bloodRequest->delete();
-        return redirect()->route('admin.blood-requests.index');
+    public function update(Request $request, $id) {
+        $bloodRequest = BloodRequest::findOrFail($id);
+        $bloodRequest->update($request->all());
+        return redirect()->route('admin.blood-requests.index')->with('success', 'Uğurla yeniləndi!');
     }
 }

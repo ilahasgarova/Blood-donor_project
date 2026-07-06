@@ -60,9 +60,9 @@
           <div class="form-group">
             <label>Təcillilik <span style="color:var(--primary)">*</span></label>
             <select name="tecillik" class="form-control" required>
-              <option value="tecili" {{ old('tecillik') == 'tecili' ? 'selected' : '' }}>Təcili (24 saat içində)</option>
-              <option value="orta" {{ old('tecillik') == 'orta' ? 'selected' : '' }}>Orta (3 gün içində)</option>
-              <option value="planli" {{ old('tecillik') == 'planli' ? 'selected' : '' }}>Planlı (1 həftə)</option>
+              <option value="tecili" {{ old('tecillik') == 'tecili' ? 'selected' : '' }}>Normal</option>
+              <option value="orta" {{ old('tecillik') == 'orta' ? 'selected' : '' }}>Təcili</option>
+              <option value="planli" {{ old('tecillik') == 'planli' ? 'selected' : '' }}>Kritik</option>
             </select>
           </div>
           <div class="form-group">

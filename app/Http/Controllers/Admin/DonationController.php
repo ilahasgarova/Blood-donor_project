@@ -11,7 +11,7 @@ class DonationController extends Controller
 {
     public function index()
     {
-        $donations = Donation::with('donor')->get();
+        $donations = Donation::with('donor')->latest()->get();
         return view('admin.donations.index', compact('donations'));
     }
 
@@ -24,18 +24,19 @@ class DonationController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'donor_id' => 'required|exists:donors,id',
-            'hospital' => 'required|string',
-            'city' => 'required|string',
-            'blood_type' => 'required|string',
+            'donor_id'      => 'required|exists:donors,id',
+            'hospital'      => 'required|string',
+            'city'          => 'required|string',
+            'blood_type'    => 'required|string',
             'units_donated' => 'required|integer|min:1',
             'donation_date' => 'required|date',
-            'status' => 'required|string',
-            'notes' => 'nullable|string',
+            'status'        => 'required|string',
+            'notes'         => 'nullable|string',
         ]);
 
         Donation::create($validated);
-        return redirect()->route('admin.donations.index');
+
+        return redirect()->route('admin.donations.index')->with('success', 'Bağış uğurla əlavə edildi!');
     }
 
     public function edit(Donation $donation)
@@ -47,23 +48,18 @@ class DonationController extends Controller
     public function update(Request $request, Donation $donation)
     {
         $validated = $request->validate([
-            'donor_id' => 'required|exists:donors,id',
-            'hospital' => 'required|string',
-            'city' => 'required|string',
-            'blood_type' => 'required|string',
+            'donor_id'      => 'required|exists:donors,id',
+            'hospital'      => 'required|string',
+            'city'          => 'required|string',
+            'blood_type'    => 'required|string',
             'units_donated' => 'required|integer|min:1',
             'donation_date' => 'required|date',
-            'status' => 'required|string',
-            'notes' => 'nullable|string',
+            'status'        => 'required|string',
+            'notes'         => 'nullable|string',
         ]);
 
         $donation->update($validated);
-        return redirect()->route('admin.donations.index');
-    }
 
-    public function destroy(Donation $donation)
-    {
-        $donation->delete();
-        return redirect()->route('admin.donations.index');
+        return redirect()->route('admin.donations.index')->with('success', 'Məlumat uğurla yeniləndi!');
     }
 }

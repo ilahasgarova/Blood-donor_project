@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Giriş — Qan Bağışı</title>
+    <title>Admin Giriş — Qan-Donor</title>
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <style>
         body {
@@ -78,7 +78,7 @@
 <body>
     <div class="login-box">
         <div class="login-logo">
-            <h1>🩸 Qan Bağışı</h1>
+            <h1>Qan-Donor</h1>
             <p>Admin İdarəetmə Paneli</p>
         </div>
 

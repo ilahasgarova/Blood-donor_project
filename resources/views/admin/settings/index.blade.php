@@ -14,7 +14,7 @@
 
             <div>
                 <label style="display:block; font-size:14px; color:#555; margin-bottom:6px;">Sayt Adı</label>
-                <input type="text" name="site_name" value="Qan Bağışı"
+                <input type="text" name="site_name" value="Qan-Donor"
                        style="width:100%; padding:12px 14px; border:1px solid #ddd; border-radius:8px; font-size:15px;">
             </div>
 
